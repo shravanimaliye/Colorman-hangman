@@ -1,0 +1,373 @@
+from tkinter import *
+from tkinter import PhotoImage
+import sys
+from tkinter import messagebox
+import random
+
+food5={"STEAK":"A type of meat generally sliced across the muscle fibers, potentially including a bone.","SUSHI":"A Japanese dish of prepared vinegared rice.","BREAD":"A staple food prepared from a dough of flour and water, usually by baking.","RAJMA":"An Indian Red curry dish.","BAGEL":"A firm doughnut-shaped roll traditionally made by boiling and then baking.","BASIL":"An aromatic plant of the mint family, native to tropical Asia.","BARFI":"An Indian sweet made from milk solids and sugar and typically flavoured with cardamom or nuts.","LEMON":"An acid fruit that is botanically a many-seeded pale yellow oblong berry.","FUDGE":"A soft creamy candy made typically of sugar, milk, butter, and flavoring.","PEACH":"A species of the Prunus persica.","PIZZA":"A flat, open-faced baked pie of Italian origin.","FRIES":"A dish which is very rich in oils and starch. The best flavor is Peri-Peri.","MOMOS":"A Tibetan delicacy.","RAMEN":"Quick-cooking egg noodles usually served in a broth with bits of meat and vegetables.","PASTA":"Available in all shapes and sizes served with sauces."}
+brand5={"SHELL":"Samuel Samuel is the founder of this company.","PEPSI":"Originally created and developed in 1893 by Caleb Bradham and introduced as Brad's Drink.","APPLE":"It is considered one of the Big Four of technology along with Amazon, Google, and Facebook.","YAHOO":"Owned by Verizon Media.","INTEL":"American manufacturer of semiconductor computer circuits.","ORBIT":"A brand of sugarless chewing gum from the Wrigley Company.","NIVEA":"A German personal care brand that specializes in body-care.","EVIAN":"Sourced near Lake Geneva, this company is located in France.","ZIPPO":"George G. Blaisdell founded this company in 1932.","CANON":"A Japanese multinational corporation specializing in the manufacture of imaging and optical products.","HONDA":"A Japanese public multinational conglomerate corporation primarily known as a manufacturer of automobiles, aircraft, motorcycles, and power equipment.","ROLEX":"A Swiss luxury watch manufacturer based in Geneva, Switzerland.","LIRIL":"A popular soap brand sold, to a large degree, in India, and Asia, as well as a few places in Europe.","ONIDA":"An electronics brand of Mirc Electronics, based in India."}
+gk5={"FRANC":"This country will host the 45th G7 summit 2019.","DELHI":"India’s first-ever national police museum will establish in this city.","SYRIA":"This approved a new constitution of the country in a referendum through secret voting held in February 2012.","TOKYO":"The most populous city in the world.","ANGEL":"The highest waterfall of the world.","WULAR":"The largest fresh water lake in Asia.","VENUS":"The brighest planet.","LENIN":"The goal of socialism is communism was said by him.","GANGA":"The largest river in India.","TIGER":"The National Animal of India.","EARTH":"The third planet from the sun.","THECA":"The Cells which have an essential role in fertility by producing the androgen substrate.","TISTA":"The main river in Sikkim.","MANAS":"A wild life sanctuary located in Assam.","NYLON":"The first synthetic fibre made by man."}
+mov10={"COMMANDO":"Vidyut Jammwal plays the lead role","GODZILLA":"It has dinosaurs in the movie","CONFLICT":"It is Based on The story of Pentacle by Robert Siodmak, Alfred Neumann","KINGKONG":"It has Giant gorilla in it","LIFEOFPI":"It has Irfan Khan in it ,it is Hollywood Movie","STARWARS":"it is an American epic space opera franchise","SUPERMAN":"Movie of the DC superhero","THEMUMMY":"It has Mummy in it ","GASLIGHT":"One of the Best film of 1994","GANGSTER":"Starcast-Kangana Ranaut, Shiney Ahuja, Emraan Hashmi, Gulshan Grover","RAINCOAT":"Starcast- Ajay Devgn, Aishwarya Rai Bachchan","SPEEDWAY":"June 1986 directed by Norman Taurog","NAKEDGUN":"What you call a gun which is Naked","LIFEBOAT":"This film revolves around eight survivors of a Nazi torpedo ship attack, who find themselves in the same boat with a man who sunk the ship.","MONALISA":"May 1986 Movie Directed by Neil Jordan"}
+city10={"ABUDHABI":"The Capital City of United Arab Emirates","BRASILIA":"The Capital City of  Brazil","CANBERRA":"The Capital City of AUSTRALIA","CHISINAU":"The Capital City of Moldova","CASTRIES":"The Capital City of Saint Lucia","FREETOWN":"The Capital City of Sierra Leone ","NEWDELHI":"The Capital City of India","PRETORIA":"The Capital City of South Africa","WINDHOEK":"The Capital City of Namibia","VICTORIA":"The Capital City of Seychelles","SANTIAGO":"The Capital City of Chile","ROADTOWN":"The Capital City of British Virgin Island","THEHAGUE":"The Capital City of Netherlands","PRISTINA":"The Capital City of Kosovo","BUDAPEST":"The Capital City of Hungary"}
+avng10={"DEADPOOL":"The character first appeared in The New Mutants,Coolest Character ever ","NICKFURY":"One Eye man","STARLORD":"He is a Super Hero but we hate him after Avengers Infinity War","LUKECAGE":"a man with super strength and unbreakable skin caused by a sabotaged experiment","HERCULES":"The character is based on Heracles of Greek mythology and Roman mythology","PUNISHER":"It's a Punisher era like no other!","JEANGREY":"The character first appeared in The X-Men ","STARFIRE":"It is an alien superhero with powers of flight, super strength and energy projection.","STARBOLT":"It is a member of the Imperial Guard","STONEMAN":"He is made of Stone","HYDROMAN":"He made his first appearance in The Amazing Spider-Man","HELLIONS":"There have been several fictional groups of mutants who have used the name__","MENTALLO":"He once worked as a shoe salesman.","MANTHING":"The character first appeared in Savage Tales ","NOCTURNE":"The character is depicted as a member of the reality-hopping Exiles and formerly associated with New Excalibur."}
+chances=6
+guessed=[]
+
+def game1(word,hint):
+    global w1
+    w1 = word
+    root = Tk()
+    root.title("GUESS THE WORD")
+    root.geometry("1120x960+383+134")
+    root.configure(background="purple")
+    bt1=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt2=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt3=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt4=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt5=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt1.place(x=64,y=160)
+    bt2.place(x=128,y=160)
+    bt3.place(x=192,y=160)
+    bt4.place(x=256,y=160)
+    bt5.place(x=320,y=160)
+    def check():
+        global chances
+        if bt1["text"]==w1[0] and bt2["text"]==w1[1] and bt3["text"]==w1[2] and bt4["text"]==w1[3] and bt5["text"]==w1[4]:
+            chances=6
+            guessed.clear()
+            again=messagebox.askyesno("PLAY AGAIN?", "CONGRATULATIONS! YOU GUESSED IT RIGHT! \n DO YOU WANT TO PLAY AGAIN?")
+            root.destroy()
+            if again==True:
+                category()
+            else:
+                sys.exit()
+    def clicked1(letter):
+        global chances
+        global guessed
+        guessed.append(letter)
+        lguessed = Label(root, text="GUESSED: ", font=('Comic Sans MS', 12), bg="black", fg="white")
+        lguessed.place(x=720, y=500)
+        t="GUESSED: "+str(guessed)
+        lguessed["text"]=t
+        if letter in w1:
+            if letter==w1[0]:
+                bt1["text"]=letter
+            if letter==w1[1]:
+                bt2["text"]=letter
+            if letter==w1[2]:
+                bt3["text"]=letter
+            if letter==w1[3]:
+                bt4["text"]=letter
+            if letter==w1[4]:
+                bt5["text"]=letter
+        else:
+            chances = chances - 1;
+            txt="CHANCES REMAINING: "+str(chances);
+            chan["text"]=txt
+            if (chances == 5):
+                root.configure(background="indigo")
+            if (chances == 4):
+                root.configure(background="blue")
+            if (chances == 3):
+                root.configure(background="green")
+            if (chances == 2):
+                root.configure(background="yellow")
+            if (chances == 1):
+                root.configure(background="orange")
+            if chances==0:
+                root.configure(background="red")
+                chances=6
+                guessed.clear()
+                again=messagebox.askyesno("PLAY AGAIN?","SORRY! YOU LOSE! \n DO YOU WANT TO PLAY AGAIN?")
+                root.destroy()
+                if again==True:
+                    category()
+                else:
+                    sys.exit()
+        check()
+    def displayhint():
+        l4=Label(root,text=hint,font=('Comic Sans MS',8),bg="black",fg="white",)
+        l4.place(x=20,y=270)
+    b10=Button(root,text="HINT",font=('Comic Sans MS',8),bg="black",fg="white",command=displayhint)
+    b10.place(x=192,y=240)
+    btn1=Button(root,text="Q",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda: clicked1("Q"))
+    btn1.place(x=32,y=360)
+    btn2 = Button(root, text="W",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("W"))
+    btn2.place(x=64,y=360)
+    btn3 = Button(root, text="E",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("E"))
+    btn3.place(x=96,y=360)
+    btn4 = Button(root, text="R",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("R"))
+    btn4.place(x=128,y=360)
+    btn5 = Button(root, text="T",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("T"))
+    btn5.place(x=160,y=360)
+    btn6 = Button(root, text="Y",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("Y"))
+    btn6.place(x=192,y=360)
+    btn7 = Button(root, text="U",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("U"))
+    btn7.place(x=224,y=360)
+    btn8 = Button(root, text="I",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("I"))
+    btn8.place(x=256,y=360)
+    btn9 = Button(root, text="O",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("O"))
+    btn9.place(x=288,y=360)
+    btn10 = Button(root, text="P",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("P"))
+    btn10.place(x=320,y=360)
+    btn11 = Button(root, text="A",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("A"))
+    btn11.place(x=35.5,y=480)
+    btn12 = Button(root, text="S",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("S"))
+    btn12.place(x=71,y=480)
+    btn13 = Button(root, text="D",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("D"))
+    btn13.place(x=106.5,y=480)
+    btn14 = Button(root, text="F",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("F"))
+    btn14.place(x=142,y=480)
+    btn15 = Button(root, text="G",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("G"))
+    btn15.place(x=177.5,y=480)
+    btn16 = Button(root, text="H",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("H"))
+    btn16.place(x=213,y=480)
+    btn17 = Button(root, text="J",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("J"))
+    btn17.place(x=248.5,y=480)
+    btn18 = Button(root, text="K",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("K"))
+    btn18.place(x=284,y=480)
+    btn19 = Button(root, text="L",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("L"))
+    btn19.place(x=319.5,y=480)
+    btn20 = Button(root, text="Z",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("Z"))
+    btn20.place(x=45.7,y=600)
+    btn21 = Button(root, text="X",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("X"))
+    btn21.place(x=91.4,y=600)
+    btn22 = Button(root, text="C",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("C"))
+    btn22.place(x=137.1,y=600)
+    btn23 = Button(root, text="V",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("V"))
+    btn23.place(x=182.8,y=600)
+    btn24 = Button(root, text="B",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("B"))
+    btn24.place(x=228.5,y=600)
+    btn25 = Button(root, text="N",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("N"))
+    btn25.place(x=274.2,y=600)
+    btn26 = Button(root, text="M",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked1("M"))
+    btn26.place(x=319.9,y=600)
+    chan=Label(root,text="CHANCES REMAINING : 6",font=('Comic Sans MS',12),bg="black",fg="white",)
+    chan.place(x=720,y=400)
+    root.mainloop()
+def game2(word,hint):
+    global w1
+    w1=word
+    root=Tk()
+    root.title("GUESS THE WORD")
+    root.geometry("1120x960+383+134")
+    root.configure(background="purple")
+    bt1=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt2=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt3=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt4=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt5=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt6=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt7=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt8=Button(root,text=" ",width=4,height=2,font=('Comic Sans MS',8),bg="black",fg="white",)
+    bt1.place(x=40,y=160)
+    bt2.place(x=80,y=160)
+    bt3.place(x=120,y=160)
+    bt4.place(x=160,y=160)
+    bt5.place(x=200,y=160)
+    bt6.place(x=240,y=160)
+    bt7.place(x=280,y=160)
+    bt8.place(x=320,y=160)
+    def check():
+        global chances
+        global guessed
+        if bt1["text"]==w1[0] and bt2["text"]==w1[1] and bt3["text"]==w1[2] and bt4["text"]==w1[3] and bt5["text"]==w1[4] and bt6["text"]==w1[5] and bt7["text"]==w1[6] and bt8["text"]==w1[7]:
+            chances=6
+            guessed.clear()
+            again=messagebox.askyesno("PLAY AGAIN?", "CONGRATULATIONS! YOU GUESSED IT RIGHT! \n DO YOU WANT TO PLAY AGAIN?")
+            root.destroy()
+            if again==True:
+                category()
+            else:
+                sys.exit()
+    def clicked2(letter):
+        global chances
+        global guessed
+        guessed.append(letter)
+        lguessed = Label(root, text="GUESSED: ", font=('Comic Sans MS', 12), bg="black", fg="white")
+        lguessed.place(x=720, y=500)
+        t = "GUESSED: " + str(guessed)
+        lguessed["text"] = t
+        if letter in w1:
+            if letter==w1[0]:
+                bt1["text"]=letter
+            if letter==w1[1]:
+                bt2["text"]=letter
+            if letter==w1[2]:
+                bt3["text"]=letter
+            if letter==w1[3]:
+                bt4["text"]=letter
+            if letter==w1[4]:
+                bt5["text"]=letter
+            if letter==w1[5]:
+                bt6["text"]=letter
+            if letter==w1[6]:
+                bt7["text"]=letter
+            if letter==w1[7]:
+                bt8["text"]=letter
+        else:
+            chances = chances - 1;
+            txt="CHANCES REMAINING: "+str(chances);
+            chan["text"]=txt
+            if (chances == 5):
+                root.configure(background="indigo")
+            if (chances == 4):
+                root.configure(background="blue")
+            if (chances == 3):
+                root.configure(background="green")
+            if (chances == 2):
+                root.configure(background="yellow")
+            if (chances == 1):
+                root.configure(background="orange")
+            if chances==0:
+                root.configure(background="red")
+                chances=6
+                guessed.clear()
+                again=messagebox.askyesno("PLAY AGAIN?","SORRY! YOU LOSE! \n DO YOU WANT TO PLAY AGAIN?")
+                root.destroy()
+                if again==True:
+                    category()
+                else:
+                    sys.exit()
+        check()
+    def displayhint():
+        l4=Label(root,text=hint,font=('Comic Sans MS',8),bg="black",fg="white",)
+        l4.place(x=20,y=270)
+    b10=Button(root,text="HINT",font=('Comic Sans MS',8),bg="black",fg="white",command=displayhint)
+    b10.place(x=200,y=240)
+    btn1=Button(root,text="Q",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda: clicked2("Q"))
+    btn1.place(x=32,y=360)
+    btn2 = Button(root, text="W",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("W"))
+    btn2.place(x=64,y=360)
+    btn3 = Button(root, text="E",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("E"))
+    btn3.place(x=96,y=360)
+    btn4 = Button(root, text="R",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("R"))
+    btn4.place(x=128,y=360)
+    btn5 = Button(root, text="T",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("T"))
+    btn5.place(x=160,y=360)
+    btn6 = Button(root, text="Y",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("Y"))
+    btn6.place(x=192,y=360)
+    btn7 = Button(root, text="U",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("U"))
+    btn7.place(x=224,y=360)
+    btn8 = Button(root, text="I",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("I"))
+    btn8.place(x=256,y=360)
+    btn9 = Button(root, text="O",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("O"))
+    btn9.place(x=288,y=360)
+    btn10 = Button(root, text="P",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("P"))
+    btn10.place(x=320,y=360)
+    btn11 = Button(root, text="A",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("A"))
+    btn11.place(x=35.5,y=480)
+    btn12 = Button(root, text="S",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("S"))
+    btn12.place(x=71,y=480)
+    btn13 = Button(root, text="D",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("D"))
+    btn13.place(x=106.5,y=480)
+    btn14 = Button(root, text="F",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("F"))
+    btn14.place(x=142,y=480)
+    btn15 = Button(root, text="G",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("G"))
+    btn15.place(x=177.5,y=480)
+    btn16 = Button(root, text="H",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("H"))
+    btn16.place(x=213,y=480)
+    btn17 = Button(root, text="J",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("J"))
+    btn17.place(x=248.5,y=480)
+    btn18 = Button(root, text="K",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("K"))
+    btn18.place(x=284,y=480)
+    btn19 = Button(root, text="L",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("L"))
+    btn19.place(x=319.5,y=480)
+    btn20 = Button(root, text="Z",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("Z"))
+    btn20.place(x=45.7,y=600)
+    btn21 = Button(root, text="X",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("X"))
+    btn21.place(x=91.4,y=600)
+    btn22 = Button(root, text="C",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("C"))
+    btn22.place(x=137.1,y=600)
+    btn23 = Button(root, text="V",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("V"))
+    btn23.place(x=182.8,y=600)
+    btn24 = Button(root, text="B",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("B"))
+    btn24.place(x=228.5,y=600)
+    btn25 = Button(root, text="N",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("N"))
+    btn25.place(x=274.2,y=600)
+    btn26 = Button(root, text="M",height=2,width=4,font=('Comic Sans MS',8),bg="black",fg="white",command=lambda:clicked2("M"))
+    btn26.place(x=319.9,y=600)
+    chan=Label(root,text="CHANCES REMAINING : 6",font=('Comic Sans MS',12),bg="black",fg="white",)
+    chan.place(x=720,y=400)
+    root.mainloop()
+def exit1():
+    result=messagebox.askyesno("Exit", "Do you want to exit?")
+    if result==True:
+        sys.exit()
+def word1():
+    global word
+    word=random.choice(list(food5))
+    hint=food5[word]
+    game1(word,hint)
+def word2():
+    global word
+    word=random.choice(list(brand5))
+    hint=brand5[word]
+    game1(word,hint)
+def word3():
+    global word
+    word=random.choice(list(gk5))
+    hint=gk5[word]
+    game1(word,hint)
+def word4():
+    global word
+    word=random.choice(list(mov10))
+    hint=mov10[word]
+    game2(word,hint)
+def word5():
+    global word
+    word=random.choice(list(city10))
+    hint=city10[word]
+    game2(word,hint)
+def word6():
+    global word
+    word=random.choice(list(avng10))
+    hint=avng10[word]
+    game2(word,hint)
+def category():
+    root=Tk()
+    root.title("CATEGORY SELECTION")
+    root.configure(background="black")
+    root.geometry("800x640+383+134")
+    l2=Label(root,text="EASY LEVELS",font=('Comic Sans MS',21),bg="black",fg="white")
+    l2.place(x=400,y=30,anchor="center")
+    b5=Button(root,text="FOOD",font=('Comic Sans MS',16),bg="black",fg="white",command=word1)
+    b5.place(x=210,y=180,anchor="center")
+    b6=Button(root,text="BRAND",font=('Comic Sans MS',16),bg="black",fg="white",command=word2)
+    b6.place(x=420,y=180,anchor="center")
+    b7=Button(root,text="GK",font=('Comic Sans MS',16),bg="black",fg="white",command=word3)
+    b7.place(x=630,y=180,anchor="center")
+    l3=Label(root,text="HARD LEVELS",font=('Comic Sans MS',21),bg="black",fg="white")
+    l3.place(x=400,y=330,anchor="center")
+    b8=Button(root,text="MOVIES",font=('Comic Sans MS',16),bg="black",fg="white",command=word4)
+    b8.place(x=210,y=480,anchor="center")
+    b9=Button(root,text="PLACES",font=('Comic Sans MS',16),bg="black",fg="white",command=word5)
+    b9.place(x=420,y=480,anchor="center")
+    b10=Button(root,text="MARVEL",font=('Comic Sans MS',16),bg="black",fg="white",command=word6)
+    b10.place(x=630,y=480,anchor="center")
+    ex=Button(root,text="EXIT",font=('Comic Sans MS',16),bg="black",fg="white",command=exit1)
+    ex.place(x=700,y=600,anchor="center")
+    root.mainloop()
+def info1():
+    messagebox.showinfo("INSTRUCTIONS","1. The game COLOURMAN is a spin-off from the original game “HANGMAN”. \n 2. The aim of the game is to guess the word right before the screen turns red. \n 3. The player gets 6 incorrect guesses before the screen changes to the colour red. \n 4. The player will get a hint so as to help in guessing the word correctly. \n 5. The player has the option to select the category from 3 easy levels and 3 hard levels. \n 6. The number of chances remaining are indicated by the following colours: \n VIOLET-6 \n INDIGO-5 \n BLUE-4 \n GREEN-3 \n YELLOW-2 \n ORANGE-1 \n RED-0")
+def info2():
+    messagebox.showinfo("ABOUT US","The game COLOURMAN has been developed as a part of our curriculum as IT students. \n It has been developed by using a variety of tools which are available in Python version 3.7.2 and above.\n The game is entirely user interactive.")
+def start():
+    root=Tk()
+    root.title("WELCOME TO COLOURMAN")
+    root.geometry("640x640+383+134")
+    p1=PhotoImage(file="color.png")
+    pic=Label(root,image=p1)
+    pic.place(x=0,y=0)
+    l1=Label(root,text="COLOURMAN",font=('Comic Sans MS',56),bg="black",fg="white")
+    l1.place(x=320,y=100,anchor="center")
+    b1=Button(root,text="LEGGO!",font=('Comic Sans MS',24),bg="black",fg="white",command=category)
+    b1.place(x=320,y=225,anchor="center")
+    b2=Button(root,text="INSTRUCTIONS",font=('Comic Sans MS',24),bg="black",fg="white",command=info1)
+    b2.place(x=320,y=325,anchor="center")
+    b3=Button(root,text="ABOUT US",font=('Comic Sans MS',24),bg="black",fg="white",command=info2)
+    b3.place(x=320,y=425,anchor="center")
+    b4=Button(root,text="EXIT",font=('Comic Sans MS',24),bg="black",fg="white",command=exit1)
+    b4.place(x=320,y=525,anchor="center")
+    root.mainloop()
+go=start()
